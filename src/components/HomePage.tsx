@@ -164,79 +164,7 @@ export default function HomePage({ user, setActiveTab, stats }: HomePageProps) {
         </div>
       </section>
 
-      {/* Database Integration Control Panel */}
-      <section className="bg-white border border-slate-200/85 rounded-3xl p-6 sm:p-8 shadow-xs space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="flex items-start gap-4">
-            <div className="p-3 rounded-2xl bg-emerald-50 text-emerald-600">
-              <Database className="h-6 w-6" />
-            </div>
-            <div>
-              <div className="flex flex-wrap items-center gap-2">
-                <h3 className="font-display font-extrabold text-lg text-slate-900 tracking-tight">
-                  {isSupabaseConfigured ? 'Supabase PostgreSQL Integration' : 'Database Not Connected'}
-                </h3>
-                <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
-                  isSupabaseConfigured ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
-                }`}>
-                  {isSupabaseConfigured ? 'Live (Supabase)' : 'Offline Mode'}
-                </span>
-              </div>
-              <p className="text-xs text-slate-500 mt-1">
-                {isSupabaseConfigured 
-                  ? 'All operations are actively synchronizing in real-time with your live Supabase PostgreSQL database!'
-                  : 'Connect your Supabase credentials in the environment file to activate PostgreSQL data.'}
-              </p>
-            </div>
-          </div>
-          
-          <button
-            onClick={() => setShowSql(!showSql)}
-            className="px-4 py-2 text-xs font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-all cursor-pointer whitespace-nowrap self-start sm:self-center"
-          >
-            {showSql ? 'Hide SQL Schema' : 'View SQL Setup Schema'}
-          </button>
-        </div>
 
-        {/* If Supabase is not configured yet, provide instructions */}
-        {!isSupabaseConfigured && (
-          <div className="p-5 bg-slate-50 border border-slate-100 rounded-2xl space-y-4">
-            <div className="text-sm font-bold text-slate-800">Quick Integration Steps:</div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-600">
-              <div className="space-y-1.5">
-                <div className="font-semibold text-indigo-600">Step 1: Set Environment Secrets</div>
-                <p className="leading-relaxed">
-                  Go to the **Secrets Panel** in the AI Studio UI and provide your Supabase URL as <code className="bg-slate-200 px-1 py-0.5 rounded text-[10px] font-mono font-semibold">VITE_SUPABASE_URL</code> and your API key as <code className="bg-slate-200 px-1 py-0.5 rounded text-[10px] font-mono font-semibold">VITE_SUPABASE_ANON_KEY</code>.
-                </p>
-              </div>
-              <div className="space-y-1.5">
-                <div className="font-semibold text-indigo-600">Step 2: Initialize PostgreSQL Tables</div>
-                <p className="leading-relaxed">
-                  Click **"View SQL Setup Schema"** above, copy the SQL queries, and paste them into the **SQL Editor** of your Supabase Workspace to create the database tables instantly!
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {showSql && (
-          <div className="border border-slate-200 rounded-2xl overflow-hidden bg-slate-900 shadow-inner">
-            <div className="bg-slate-950 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
-              <span className="text-xs font-mono text-slate-400">supabase_schema_setup.sql</span>
-              <button
-                onClick={handleCopySql}
-                className="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-bold transition-all cursor-pointer"
-              >
-                {copied ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5" />}
-                {copied ? 'Copied!' : 'Copy SQL Script'}
-              </button>
-            </div>
-            <pre className="p-4 overflow-x-auto text-[11px] font-mono text-slate-300 leading-relaxed max-h-72 custom-scrollbar">
-              {SUPABASE_SQL_SETUP}
-            </pre>
-          </div>
-        )}
-      </section>
 
       {/* Bento Grid Platform Core Features */}
       <section className="space-y-6">
