@@ -42,18 +42,18 @@ graph TD
 CollabPM provides tailored dashboards and tools for three primary user roles:
 
 ### 🎓 1. Student Dashboard
-- **Project Submission**: Submit project proposals detailing description, category, team members, and desired mentor.
+- **Project Submission**: Submit project proposals detailing description, category, team members, and select their preferred mentor.
 - **Interactive Milestone Roadmap**: Track progress across preset milestones (e.g., Proposal, UI Design, Core Dev, Testing) or custom steps.
 - **Resource Linking**: Submit project deliverables by linking GitHub repositories, live demo URLs, and uploading files.
 - **Attachment Uploads**: Seamlessly upload project files via base64 encoding processed securely by the Express backend.
 
 ### 🧑‍🏫 2. Mentor Panel
-- **Assigned Projects Overview**: View and manage all projects assigned by the academic dean or administrators.
+- **Assigned Projects Overview**: View and manage all projects where they have been selected as the mentor.
 - **Milestone Verification**: Review and approve student milestone submissions.
 - **Structured Feedback**: Write comments and assign official project statuses (`approved`, `revision`, `rejected`).
 
 ### 🔑 3. Administrative Console
-- **Project Catalog & Assignment**: Oversee all submissions, approve/reject projects, and assign mentors.
+- **Project Catalog & Oversight**: Oversee all submissions, approve/reject projects, and confirm or adjust mentor selections.
 - **User Directory**: View all registered user profiles, change department affiliations, and elevate student accounts to mentors.
 - **Helpdesk & Support**: Manage, review, and resolve user-submitted support queries.
 
@@ -89,9 +89,9 @@ sequenceDiagram
     actor Admin
     actor Mentor
 
-    Student->>Backend: Submits project proposal & requests mentor
+    Student->>Backend: Submits project proposal & selects preferred mentor
     Backend->>Admin: Displays pending project in Admin Panel
-    Admin->>Backend: Approves project and assigns Mentor
+    Admin->>Backend: Approves project and confirms selected Mentor
     Backend->>Mentor: Syncs project to Mentor Panel
     Student->>Backend: Updates Milestones (adds GitHub, demo, or files)
     Mentor->>Backend: Reviews progress and submits feedback
