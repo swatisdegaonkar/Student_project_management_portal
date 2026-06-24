@@ -12,11 +12,10 @@ const DEFAULT_MENTORS = [
   { uid: 'mentor-prof-alan', displayName: 'Prof. Alan Turing', email: 'alan.turing@university.edu', department: 'Data Science & Cyber', role: 'mentor' },
   { uid: 'mentor-dr-grace', displayName: 'Dr. Grace Hopper', email: 'grace.hopper@university.edu', department: 'Software Engineering', role: 'mentor' },
 ];
+const app = express();
+const PORT = Number(process.env.PORT) || 3000;
 
 async function startServer() {
-  const app = express();
-  const PORT = 3000;
-
   // Set limits higher to support base64 file uploads
   app.use(express.json({ limit: '50mb' }));
   app.use(express.urlencoded({ limit: '50mb', extended: true }));
@@ -866,9 +865,13 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server running on port ${PORT}`);
-  });
+  if (!process.env.VERCEL) {
+    app.listen(PORT, '0.0.0.0', () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  }
 }
 
 startServer();
+
+export default app;
