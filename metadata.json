@@ -1,0 +1,6 @@
+{
+  "name": "Student Project Management Portal",
+  "description": "A comprehensive portal for students to submit and track projects, and for mentors to review and manage student projects with secure authentication.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
