@@ -86,16 +86,14 @@ CollabPM provides tailored dashboards and tools for three primary user roles:
 sequenceDiagram
     autonumber
     actor Student
-    actor Admin
     actor Mentor
 
-    Student->>Backend: Submits project proposal & selects preferred mentor
-    Backend->>Admin: Displays pending project in Admin Panel
-    Admin->>Backend: Approves project and confirms selected Mentor
-    Backend->>Mentor: Syncs project to Mentor Panel
-    Student->>Backend: Updates Milestones (adds GitHub, demo, or files)
-    Mentor->>Backend: Reviews progress and submits feedback
-    Note over Student, Mentor: Repeat loop until all milestones are complete
+    Student->>Backend: Submits project proposal & selects preferred Mentor
+    Backend->>Mentor: Immediately routes proposal to selected Mentor's Queue
+    Mentor->>Backend: Reviews proposal and grants approval (or requests revision)
+    Student->>Backend: Submits deliverables & updates Milestones (adds GitHub, demo, or files)
+    Mentor->>Backend: Reviews milestone submissions and verifies progress
+    Note over Student, Mentor: Repeat loop until all milestones are completed
     Backend->>Student: Marks project as "Completed"
 ```
 
