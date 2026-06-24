@@ -13,7 +13,7 @@ export const isSupabaseConfigured =
   supabaseAnonKey.trim().length > 20;
 
 // Initialize actual Supabase client (only if direct access is needed, but we prefer Express API proxy to avoid fetch CORS/iframe issues)
-export const supabase = isSupabaseConfigured 
+export const supabase = isSupabaseConfigured
   ? createClient(supabaseUrl.trim(), supabaseAnonKey.trim())
   : null;
 
@@ -254,7 +254,7 @@ export async function createSupabaseProject(
     const localList = raw ? JSON.parse(raw) : [];
     localList.push({ id: result.id, ...projectData, status: 'pending', createdAt: new Date().toISOString(), milestones: initialMilestones, feedback: [] });
     localStorage.setItem('collabpm_local_projects', JSON.stringify(localList));
-  } catch (e) {}
+  } catch (e) { }
 
   return result.id;
 }
@@ -319,7 +319,7 @@ export async function updateSupabaseMilestoneStatus(
         localStorage.setItem('collabpm_local_projects', JSON.stringify(localList));
       }
     }
-  } catch (e) {}
+  } catch (e) { }
 
   await apiRequest<void>('/api/supabase/projects/milestones', {
     method: 'PATCH',
@@ -357,7 +357,7 @@ export async function addSupabaseMentorFeedback(
         localStorage.setItem('collabpm_local_projects', JSON.stringify(localList));
       }
     }
-  } catch (e) {}
+  } catch (e) { }
 
   await apiRequest<void>('/api/supabase/projects/feedback', {
     method: 'POST',
@@ -573,7 +573,7 @@ export function onSupabaseAuthStateChanged(
     });
     return () => subscription.unsubscribe();
   }
-  return () => {};
+  return () => { };
 }
 
 export async function getSupabaseAllUsers(): Promise<UserProfile[]> {

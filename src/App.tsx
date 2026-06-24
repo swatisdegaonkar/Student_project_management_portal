@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  onSupabaseAuthStateChanged, 
-  signOutUser, 
-  getSupabaseStudentProjects, 
-  getSupabaseMentorProjects, 
+import {
+  onSupabaseAuthStateChanged,
+  signOutUser,
+  getSupabaseStudentProjects,
+  getSupabaseMentorProjects,
   getSupabaseAllProjects,
   DEFAULT_MENTORS,
   isSupabaseConfigured,
@@ -80,8 +80,8 @@ export default function App() {
       user.role === 'mentor'
         ? ['home', 'mentor', 'contact']
         : user.role === 'admin'
-        ? ['home', 'contact']
-        : ['home', 'dashboard', 'submit', 'progress', 'contact'];
+          ? ['home', 'contact']
+          : ['home', 'dashboard', 'submit', 'progress', 'contact'];
 
     if (!allowedTabs.includes(activeTab)) {
       setActiveTab(user.role === 'mentor' ? 'mentor' : 'home');
@@ -90,7 +90,7 @@ export default function App() {
 
     try {
       localStorage.setItem(ACTIVE_TAB_STORAGE_KEY, activeTab);
-    } catch (e) {}
+    } catch (e) { }
   }, [activeTab, user]);
 
   // Stats calculation
@@ -164,7 +164,7 @@ export default function App() {
     const approvedCount = sorted.filter(p => p.status === 'approved' || p.status === 'completed').length;
     const pendingCount = sorted.filter(p => p.status === 'pending').length;
     let finishedMilestones = 0;
-    
+
     sorted.forEach(p => {
       finishedMilestones += (p.milestones || []).filter(m => m.status === 'completed' || m.status === 'approved').length;
     });
@@ -180,7 +180,7 @@ export default function App() {
   // Fetch / Synchronize Projects list in real-time
   useEffect(() => {
     if (!user) return;
-    
+
     setLoadingProjects(true);
     fetchProjectsOneTime();
 
@@ -224,7 +224,7 @@ export default function App() {
       } else {
         items = await getSupabaseStudentProjects(user.uid);
       }
-      
+
       const sorted = items.sort((a, b) => {
         const dateA = a.createdAt?.seconds ? a.createdAt.seconds : 0;
         const dateB = b.createdAt?.seconds ? b.createdAt.seconds : 0;
@@ -272,34 +272,34 @@ export default function App() {
     switch (activeTab) {
       case 'home':
         return (
-          <HomePage 
-            user={user} 
-            setActiveTab={setActiveTab} 
-            stats={stats} 
+          <HomePage
+            user={user}
+            setActiveTab={setActiveTab}
+            stats={stats}
           />
         );
       case 'dashboard':
         return (
-          <StudentDashboard 
-            user={user!} 
-            projects={projects} 
+          <StudentDashboard
+            user={user!}
+            projects={projects}
             setActiveTab={setActiveTab}
             setSelectedProject={setSelectedProject}
           />
         );
       case 'submit':
         return (
-          <ProjectSubmission 
-            user={user!} 
-            setActiveTab={setActiveTab} 
+          <ProjectSubmission
+            user={user!}
+            setActiveTab={setActiveTab}
             onRefreshProjects={fetchProjectsOneTime}
           />
         );
       case 'progress':
         return (
-          <ProgressTracking 
-            user={user!} 
-            projects={projects} 
+          <ProgressTracking
+            user={user!}
+            projects={projects}
             selectedProject={selectedProject}
             setSelectedProject={setSelectedProject}
             onRefreshProjects={fetchProjectsOneTime}
@@ -308,9 +308,9 @@ export default function App() {
         );
       case 'mentor':
         return user?.role === 'mentor' ? (
-          <MentorPanel 
-            user={user} 
-            projects={projects} 
+          <MentorPanel
+            user={user}
+            projects={projects}
             onRefreshProjects={fetchProjectsOneTime}
           />
         ) : (
@@ -341,7 +341,7 @@ export default function App() {
             <Loader2 className="h-4 w-4 animate-spin text-indigo-600" />
             Connecting to Academic Database...
           </div>
-          
+
           <div className="p-4 bg-white border border-slate-200 rounded-2xl shadow-sm text-xs text-slate-500 space-y-3">
             <p className="leading-relaxed">
               If connection takes too long, you can bypass the database connection and load the portal immediately using a secure Sandbox Profile:
@@ -470,11 +470,11 @@ export default function App() {
 
         {isLoggedAsAdmin ? (
           <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <AdminPanel 
-              user={user!} 
+            <AdminPanel
+              user={user!}
               projects={projects}
               onRefreshProjects={fetchProjectsOneTime}
-              onLogout={handleLogout} 
+              onLogout={handleLogout}
             />
           </main>
         ) : (
@@ -497,7 +497,7 @@ export default function App() {
               {user && user.role !== 'admin' && (
                 <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-800 space-y-2">
                   <p>You are currently logged in as a <strong>{user.role}</strong> ({user.displayName}). You must sign out first to gain administrative access.</p>
-                  <button 
+                  <button
                     onClick={handleLogout}
                     className="w-full py-1.5 bg-amber-650 hover:bg-amber-700 text-white font-bold rounded-lg cursor-pointer"
                   >
@@ -604,11 +604,11 @@ export default function App() {
       {/* Navbar visible when user is logged in */}
       {user ? (
         <>
-          <Navbar 
-            user={user} 
-            activeTab={activeTab} 
-            setActiveTab={setActiveTab} 
-            onLogout={handleLogout} 
+          <Navbar
+            user={user}
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            onLogout={handleLogout}
           />
 
           <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
