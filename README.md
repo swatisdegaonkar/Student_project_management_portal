@@ -7,7 +7,21 @@ Students can submit their project ideas, select a faculty mentor, and track thei
 ---
 
 ## How It Works (Workflow)
+### The Project Lifecycle
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Student
+    actor Mentor
 
+    Student->>Backend: Submits project proposal & selects preferred Mentor
+    Backend->>Mentor: Immediately routes proposal to selected Mentor's Queue
+    Mentor->>Backend: Reviews proposal and grants approval (or requests revision)
+    Student->>Backend: Submits deliverables & updates Milestones (adds GitHub, demo, or files)
+    Mentor->>Backend: Reviews milestone submissions and verifies progress
+    Note over Student, Mentor: Repeat loop until all milestones are completed
+    Backend->>Student: Marks project as "Completed"
+```
 The project follows a direct and easy-to-follow process:
 
 1. **Submit**: A student submits their project details, links their GitHub/Demo, and selects a preferred faculty mentor.
